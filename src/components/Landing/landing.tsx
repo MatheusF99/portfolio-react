@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import LogoIcon from '../../assets/logo.svg'
-import BkgImg from '../../assets/Bkg-big.svg'
 import ElipseImage from '../../assets/Ellipse 1.svg'
 
 import { AiOutlineGithub, AiOutlineInstagram, AiOutlineYoutube } from 'react-icons/ai'
@@ -13,9 +13,9 @@ import { RiCloseFill } from 'react-icons/ri'
 import { CgMenuHotdog } from 'react-icons/cg'
 
 import './styleLanding.css'
+import CursorEffect from '../cursorEffect/cursorEffect'
 
-
-const Landing: React.FC = () => {
+const Landing = () => {
   const [sideBar, setsideBar] = useState(false)
 
   function showMenu() {
@@ -25,6 +25,7 @@ const Landing: React.FC = () => {
 
   return (
     <div className='landing-container'>
+      <CursorEffect />
 
       <div className="landing">
         <header>
@@ -35,18 +36,50 @@ const Landing: React.FC = () => {
           </button>
         </header>
 
-
         <div className={sideBar ? 'menu active' : 'menu'}>
           <button onClick={showMenu} ><RiCloseFill size={40} /></button>
           <div className="social-list">
             <span>Social</span>
 
             <ul>
-              <li><AiOutlineInstagram /> Instagram</li>
-              <li><FiTwitter /> Twitter</li>
-              <li><AiOutlineGithub /> GitHub</li>
-              <li><AiOutlineYoutube /> YouTube</li>
-              <li><FaTwitch /> Twitch</li>
+              <li>
+                <Link to="/" className="hover-this">
+                  <AiOutlineInstagram />
+                  <span>Instagram</span>
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/" className="hover-this">
+                  <FiTwitter />
+                  <span>Twitter</span>
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/" className="hover-this">
+                  <AiOutlineGithub />
+                  <span>GitHub</span>
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/" className="hover-this">
+                  <AiOutlineYoutube />
+                  <span>
+                    YouTube
+                    </span>
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/" className="hover-this">
+                  <FaTwitch />
+                  <span>
+                    Twitch
+                    </span>
+                </Link>
+              </li>
             </ul>
 
           </div>
@@ -55,22 +88,22 @@ const Landing: React.FC = () => {
             <span>Menu</span>
 
             <ul>
-              <li> Work</li>
-              <li>About</li>
-              <li>Services</li>
-              <li>Contact</li>
+              <li><Link to="/" className="hover-this">Work</Link></li>
+              <li><Link to="/" className="hover-this">About</Link></li>
+              <li><Link to="/" className="hover-this">Services</Link></li>
+              <li><Link to="/" className="hover-this">Contact</Link></li>
             </ul>
           </div>
 
           <div className="email-div">
             <span>Email</span>
-            <a href="http://">Matheus@email.com</a>
+            <Link to="http://" className="hover-this">Matheus@email.com</Link>
           </div>
         </div>
 
-
         <section>
           <div className="div-1">
+
             <div className="apresentation-div">
               <span className="hello">Hello</span>
               <strong>I'm Mathews</strong>
