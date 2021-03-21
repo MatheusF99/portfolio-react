@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-use-before-define
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 import LogoIcon from '../../assets/logo.svg'
@@ -13,23 +13,38 @@ import { RiCloseFill } from 'react-icons/ri'
 import { CgMenuHotdog } from 'react-icons/cg'
 
 import './styleLanding.css'
-import CursorEffect from '../cursorEffect/cursorEffect'
 
 const Landing = () => {
+
   const [sideBar, setsideBar] = useState(false)
 
   function showMenu() {
     setsideBar(!sideBar)
   }
 
+  const cursorRef = useRef<any>(null)
+
+  useEffect(() => {
+    document.addEventListener('mousemove', (event) => {
+
+      const { clientX, clientY } = event
+      const mouseX = clientX - cursorRef.current.clientWidth / 2;
+      const mouseY = clientY - cursorRef.current.clientHeight / 2;
+
+      cursorRef.current.style.transform = `translate(${mouseX}px, ${mouseY}px)`
+      cursorRef.current.style.transition = `transform .1s ease`
+    })
+
+  }, [])
+
 
   return (
     <div className='landing-container'>
-      <CursorEffect />
 
       <div className="landing">
+
         <header>
-          <img src={LogoIcon} alt="" />
+          <img src={LogoIcon} alt="logo" />
 
           <button onClick={showMenu} className="toggle-Button">
             <CgMenuHotdog />
@@ -88,12 +103,13 @@ const Landing = () => {
             <span>Menu</span>
 
             <ul>
-              <li><Link to="/" className="hover-this">Work</Link></li>
-              <li><Link to="/" className="hover-this">About</Link></li>
-              <li><Link to="/" className="hover-this">Services</Link></li>
-              <li><Link to="/" className="hover-this">Contact</Link></li>
+              <li><Link to="/">Work</Link></li>
+              <li><Link to="/">About</Link></li>
+              <li><Link to="/">Services</Link></li>
+              <li><Link to="/">Contact</Link></li>
             </ul>
           </div>
+
 
           <div className="email-div">
             <span>Email</span>
@@ -103,7 +119,6 @@ const Landing = () => {
 
         <section>
           <div className="div-1">
-
             <div className="apresentation-div">
               <span className="hello">Hello</span>
               <strong>I'm Mathews</strong>
@@ -118,6 +133,8 @@ const Landing = () => {
           </div>
         </section>
       </div>
+
+      <div className="cursor" ref={cursorRef} />
     </div>
   )
 }
